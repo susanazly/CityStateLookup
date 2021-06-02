@@ -1,0 +1,12 @@
+.background{
+    background-image: url("images/clouds.jpeg");
+    height: 1000px;
+    background-repeat: repeat;
+   width: 100%;
+    background-size: cover;
+
+
+}
+.text {
+    color: black
+}

@@ -14,18 +14,29 @@ let cityStates = [
         state: "Texas",
         stateAbbr: "TX",
         cities: ["Austin", "Dallas", "Houston", "San Antonio"]
+    },
+    {
+        state: "Maryland",
+        stateAbbr: "MD",
+        cities: ["Baltimore", "Columbia", "Silver Spring", "Bethesda"]
+    },
+    {
+        state: "New York",
+        stateAbbr: "NY",
+        cities: ["New York City", "Rochester", "Buffalo", "Syracuse"]
     }
-
 ];
 
 window.onload = function () {
+    // load state dropdown when page first loads
     loadStatesList();
-
+    // connect onchange event handler for the states dropdown (hook up a function to it)
+    // find the state dropdown
     const statesList = document.getElementById("statesList");
     statesList.onchange = onStatesListChanged;
 
-    // connect onchange event handler for the team dropdown (hook up a function to it)
-    // find the team dropdown
+    // connect onchange event handler for the city dropdown (hook up a function to it)
+    // find the city dropdown
     const citiesList = document.getElementById("citiesList");
     citiesList.onchange = onCitiesListChanged;
 
@@ -41,7 +52,7 @@ function loadStatesList() {
     // create <option value="">Select One...</option> as first option
     //let selectOneOption = new Option("Select One...", "");
     let selectOneOption = document.createElement("option");
-    selectOneOption.textContent = "Select one...";
+    selectOneOption.textContent = "Select State...";
     selectOneOption.value = "";
     statesList.appendChild(selectOneOption);
 
@@ -71,7 +82,7 @@ function onStatesListChanged() {
     // find the state and city lists
     const statesList = document.getElementById("statesList");
     const citiesList = document.getElementById("citiesList");
-    // erase previous team message
+    // erase previous city message
     const messagePara = document.getElementById("messagePara");
     messagePara.innerHTML = "";
     // remove the previous cities from the citie dropdown because the state has changed
@@ -97,7 +108,7 @@ function onStatesListChanged() {
     selectOneOption.value = "";
     citiesList.appendChild(selectOneOption);
 
-    // loop thru the teams in the matching league and create <option> elements for each
+    // loop thru the teams in the matching state and create <option> elements for each
     for (let i = 0; i < matchingState.cities.length; i++) {
         let theOption = document.createElement("option");
         theOption.textContent = matchingState.cities[i];
@@ -115,7 +126,7 @@ function onCitiesListChanged() {
     const statesList = document.getElementById("statesList");
     const citiesList = document.getElementById("citiesList");
 
-    // erase previous team message
+    // erase previous city message
     const messagePara = document.getElementById("messagePara");
     messagePara.innerHTML = "";
 
@@ -127,11 +138,11 @@ function onCitiesListChanged() {
         return;
     }
 
-    // get the selected league
+    // get the selected state
     let selectedStateIndex = statesList.selectedIndex;
     let selectedState = statesList.options[selectedStateIndex].text;
 
-    // build a message w/ team and league info and display in <p>
+    // build a message w/ city and state info and display in <p>
     let message = "City: " + selectedCity + "<br>" +
         "State: " + selectedState;
     messagePara.innerHTML = message;
@@ -140,14 +151,14 @@ function onCitiesListChanged() {
 
 
 
-//fourth function
+//fourth function bring it all together 
 
 function addSelectStateFirstOptionToCitiesList() {
     const citiesList = document.getElementById("citiesList");
 
     // Add a "Select league first..." <option>
     let selectOneOption = document.createElement("option"); // creates <option> element
-    selectOneOption.textContent = "Select league first...";
+    selectOneOption.textContent = "Select State first...";
     selectOneOption.value = "";
     citiesList.appendChild(selectOneOption);
 }
